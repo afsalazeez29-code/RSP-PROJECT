@@ -1,0 +1,203 @@
+## TASK 1 — Recent Activity System
+### Priority: MEDIUM | Status: NEEDS IMPLEMENTATION (new collection)
+
+New MongoDB collection: `activities`
+{
+  userId: ObjectId,
+  type: String,       // "CREATE_RECIPE" | "EDIT_RECIPE" | "DELETE_RECIPE" | "LIKE_RECIPE" |
+                       // "SAVE_RECIPE" | "RATE_RECIPE" | "REVIEW_RECIPE" | "UPDATE_PROFILE" |
+                       // "SHARE_RECIPE" | "PUBLISH_RECIPE" | "DRAFT_RECIPE"
+  message: String,     // pre-built human-readable text, e.g. "You created \"Mojito\"."
+  recipeId: ObjectId,  // optional, only when relevant
+  recipeTitle: String, // optional
+  createdAt: Date,
+  expiresAt: Date,      // createdAt + 30 days
+}
+
+TTL index (automatic 30-day cleanup, zero manual cleanup needed):
+ActivitySchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
+
+**Create an activity record automatically on these actions (hook into the existing
+controllers for each — do not create a new trigger system, just call a shared
+createActivity() helper at the end of each successful action):**
+Create recipe        → "You created '{title}'."
+Edit/update recipe    → "You updated '{title}'."
+Delete recipe         → "You deleted '{title}'."
+Save as draft         → "You saved '{title}' as Draft."
+Publish draft          → "You published '{title}'."
+Like a recipe          → "You liked Chef {creatorName}'s '{title}'."
+Rate a recipe           → "You rated '{title}' {stars}★."
+Write a review           → "You reviewed '{title}'."
+Update profile             → "You updated your profile."
+Share a recipe (copy link)  → "You copied the recipe link."
+
+Do NOT log: search queries, page refreshes, navbar clicks, scrolling, opening menus,
+typing in forms, hover effects — keep the feed meaningful, not noisy.
+
+API:
+GET /api/activity
+  → Activity.find({ userId: req.user._id }).sort({ createdAt: -1 }).limit(20)
+  → Only the logged-in user's own activities, never another user's.
+
+Dashboard UI — Recent Activity widget:
+Show icon + message + relative time ("2 hours ago", "Yesterday", "3 days ago").
+Reuse existing relative-time formatting utility if the project already has one
+(e.g. from a date library already in use) rather than adding a new dependency.
+
+Activity icon map:🍳 Create  ✏️ Edit  🗑️ Delete  🌍 Publish  📝 Draft  ❤️ Save  👍 Like
+⭐ Rating  💬 Review  👤 Profile  📤 Share
+
+`## TASK 2— Profile Statistics — Correct Formulas (My Profile + Public Profile)
+### Priority: HIGH | Status: NEEDS VERIFICATION/FIX — Image 1 is missing several required stat fields
+
+**Backend — single stats computation (reuse in both /api/users/profile (own) and
+/api/users/profile/:username (public)):**
+// 1. Recipes = Published + Draft (own profile only; public profile counts public only
+//    for the "Recipes" label, since drafts aren't visible to others — see note below)
+const totalRecipes = await Recipe.countDocuments({ createdBy: userId });
+
+// 2. Shared Recipes = Public only
+const sharedRecipes = await Recipe.countDocuments({ createdBy: userId, isDraft: false });
+
+// 3. Total Views = sum of views across all the user's recipes (creator's own views
+//    must already be excluded at increment-time — verify the view-increment logic in
+//    RecipeDetails' GET /api/recipes/:id does NOT increment when viewer === creator)
+const viewsAgg = await Recipe.aggregate([
+  { $match: { createdBy: userId } },
+  { $group: { _id: null, total: { $sum: "$views" } } }
+]);
+const totalViews = viewsAgg[0]?.total || 0;
+
+// 4. Total Likes = sum of likes across all the user's recipes
+const likesAgg = await Recipe.aggregate([
+  { $match: { createdBy: userId } },
+  { $group: { _id: null, total: { $sum: "$likes" } } }
+]);
+const totalLikes = likesAgg[0]?.total || 0;
+
+// 5. AVG Rating = Total Rating Stars Received ÷ Total Rating Count (across all recipes)
+const ratingAgg = await Recipe.aggregate([
+  { $match: { createdBy: userId, ratingCount: { $gt: 0 } } },
+  { $group: { _id: null, stars: { $sum: { $multiply: ["$rating", "$ratingCount"] } },
+              count: { $sum: "$ratingCount" } } }
+]);
+const avgRating = ratingAgg[0] ? (ratingAgg[0].stars / ratingAgg[0].count).toFixed(1) : null;
+// Display "No Ratings Yet" or 0.0 if avgRating is null — match existing empty-state style.
+
+// 6. Latest Recipe
+const latestRecipe = await Recipe.findOne({ createdBy: userId }).sort({ createdAt: -1 });
+// Display format: "Butter Chicken (Indian Cuisine)" — Title + Cuisine
+
+// 7. Member Since = user.createdAt, formatted "MMM YYYY" e.g. "June 2026"
+
+On `/profile` (My Profile) — add the missing stat cards seen as absent in Image 1:
+Recipes, Shared Recipes, Total Views, Total Likes, AVG Rating, Bio.
+Use the same visual card/row style already present for Member Since/Location/etc. —
+just add the missing rows, don't redesign existing ones.
+
+Also add (if missing): a "Change Password" button alongside the existing
+Edit Profile / View My Recipes / Back to Dashboard / Logout buttons.
+
+---
+## TASK 3— Create Recipe — Full Validation Rules
+### Priority: MEDIUM | Status: VERIFY against Image 4 → fix any missing validation
+
+**Add/verify these exact validation rules in the Create Recipe form (frontend) AND
+mirror them server-side in the POST /api/recipes controller (never trust client-only validation):**
+
+| Field | Rule |
+|---|---|
+| Title | Required, 3–80 characters |
+| Description | Required, 20–300 characters |
+| Difficulty | Easy / Medium / Hard only |
+| Categories | Min 1, Max 3 selected |
+| Cuisine | Required, dropdown (Indian, Italian, Chinese, Arabian, Thai, Japanese, French, etc. — match existing dropdown options, don't redesign it) |
+| Servings | Min 1, Max 10 |
+| Cook Time | Min 5, Max 300 (minutes) |
+| Image | PNG/JPG/JPEG/WEBP only, 100KB–5MB. Invalid → inline message "Image must be between 100KB and 5MB." (no popup/alert — inline text only) |
+| Ingredients | Min 2, Max 25. Quantity field: numbers only, no letters. |
+| Instructions/Steps | Min 2, Max 25. Remove (X) button only shows when count > minimum. |
+| Tags | Optional, Max 5, no duplicates allowed |
+
+Image upload — two methods, both must work:
+Method 1: Click/drag-drop upload → Cloudinary folder "recipes/" → secure_url + public_id
+Method 2: Paste Image URL → backend downloads it → uploads to Cloudinary →
+          same secure_url + public_id flow → store identically to Method 1
+Both methods must result in the same imageUrl + imagePublicId fields on the Recipe document.
+
+Featured Recipe checkbox:
+// Only ONE featured recipe allowed per user at a time.
+// When a recipe is marked featured:
+await Recipe.updateMany(
+  { createdBy: userId, _id: { $ne: thisRecipeId }, isFeatured: true },
+  { $set: { isFeatured: false } }
+);
+// Then set isFeatured: true on the current recipe.
+// Featured recipe shows FIRST in both My Profile and Public Profile recipe grids.
+
+Visibility (Draft vs Public):
+isDraft: true  → visible to creator only; hidden from Home, Search, Public Profile, Recipes page
+isDraft: false → visible everywhere
+
+Bottom buttons — confirm exact behavior:
+Cancel        → discard changes, no DB write, return to previous state
+Save Draft    → isDraft: true, validates minimum required fields only, visible only to creator
+Save Changes  → (edit mode only) updates fields, visibility stays unchanged
+Publish       → isDraft: false, full validation required, visible globally
+Preview       → renders the form data through the actual RecipeDetails layout
+                read-only, makes ZERO database writes, "Edit Again" returns to the form
+
+---
+## TASK 4— Delete Protection — Confirmation Dialog (All Delete Actions)
+### Priority: MEDIUM | Status: VERIFY exists for Recipe delete → ensure same pattern everywhere
+
+**Required pattern for EVERY delete action in the app (recipe delete from My Recipes,
+Dashboard widget, etc.):**Click Delete
+  → Modal: "Delete Recipe? This action cannot be undone."
+  → [Cancel] [Delete Permanently]
+  → Cancel → nothing happens
+  → Delete Permanently →
+      1. If recipe has imagePublicId → cloudinary.uploader.destroy(imagePublicId)
+      2. Recipe.findByIdAndDelete(id)
+      3. Removed from: Search index, Public Profile, My Recipes, Dashboard, Home Feed
+      4. Create activity record (Task 14): "You deleted '{title}'."
+Use the project's existing modal/dialog component if one already exists — do not
+build a new modal system, do not change its visual style.
+
+---
+## TASK 5 — Dashboard Single Aggregated API Endpoint
+### Priority: MEDIUM | Status: VERIFY a single GET /api/dashboard exists; consolidate if multiple separate calls are currently being made
+
+Required single response shape:
+GET /api/dashboard
+{
+  user: { name, profileImage, bio, ... },
+  stats: { totalRecipes, totalLikes, totalViews, avgRating },
+  performanceHighlights: { mostViewed, mostLiked },  // null/empty-state if no data
+  topRecipes: { byViews: [...], byLikes: [...] },     // excludes 0-value entries
+  myRecipes: [...],       // newest first, published + draft
+  savedRecipes: [...],
+  recentActivities: [...] // newest first, max 15-20 items
+}
+If the frontend currently makes 4-5 separate API calls to build the Dashboard, consolidate
+the backend to gather all of this in one controller and return it as one JSON response —
+update the frontend Dashboard component to consume this single endpoint instead. This is
+a backend + data-fetching change only; the rendered UI/layout must look identical.
+
+Performance Highlights logic:
+// Most Viewed: published recipes only, sort views DESC, tie → newest createdAt wins.
+//   If all recipes have 0 views → "No Recipe Data Yet."
+// Most Liked: same pattern using likes DESC.
+
+Top Recipes logic:
+// Sort by Views: published only, EXCLUDE 0-view recipes, sort DESC.
+//   If none qualify → "No Views Data Yet."
+// Sort by Likes: same pattern, exclude 0-like recipes.
+//   If none qualify → "No Likes Data Yet."
+
+---
+
+## VERIFICATION CHECKLIST (run after implementing all tasks)
+
+
+---

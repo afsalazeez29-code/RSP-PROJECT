@@ -1,0 +1,25 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 30
+    },
+    "auditLog": "C:\\Users\\afsal\\OneDrive\\Desktop\\RSP-Project\\logs\\.c3b5c81c9cebfa00712f5b0f96decf7d9f95bf9d-audit.json",
+    "files": [
+        {
+            "date": 1781977268348,
+            "name": "C:\\Users\\afsal\\OneDrive\\Desktop\\RSP-Project\\logs\\app-2026-06-20.log",
+            "hash": "38d81c62b964a7938afde7b3552ca057b61aea9ebfa0e06e8891b9b2e5b0f8e6"
+        },
+        {
+            "date": 1782836176542,
+            "name": "C:\\Users\\afsal\\OneDrive\\Desktop\\RSP-Project\\logs\\app-2026-06-30.log",
+            "hash": "511b3769517ff0dd93f545605e0adef12fa880a68c44f28de6ffd13189a8a23d"
+        },
+        {
+            "date": 1782919315689,
+            "name": "C:\\Users\\afsal\\OneDrive\\Desktop\\RSP-Project\\logs\\app-2026-07-01.log",
+            "hash": "a02f2a770716eca62ebfe2fe5cfbaa4a22ac986e4bb6f0ea97a1b48ecfb2e5f1"
+        }
+    ],
+    "hashType": "sha256"
+}

@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "scripts": {
+    "migrate": "node backend/migration/migrateRecipes.js"
+  }
+}

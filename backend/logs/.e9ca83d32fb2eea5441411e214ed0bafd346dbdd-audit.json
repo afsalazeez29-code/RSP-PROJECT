@@ -1,0 +1,60 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 30
+    },
+    "auditLog": "C:\\Users\\afsal\\OneDrive\\Desktop\\RSP-Project\\backend\\logs\\.e9ca83d32fb2eea5441411e214ed0bafd346dbdd-audit.json",
+    "files": [
+        {
+            "date": 1780755434645,
+            "name": "C:\\Users\\afsal\\OneDrive\\Desktop\\RSP-Project\\backend\\logs\\admin-2026-06-06.log",
+            "hash": "83f947ff6becebe38656cee1600d6408e6a15c9a37ffe214382ca265242287fb"
+        },
+        {
+            "date": 1780936519266,
+            "name": "C:\\Users\\afsal\\OneDrive\\Desktop\\RSP-Project\\backend\\logs\\admin-2026-06-08.log",
+            "hash": "8d136bea2956479b52c07bc086f76849e09e865214f42821bfe62061460e062b"
+        },
+        {
+            "date": 1781099038395,
+            "name": "C:\\Users\\afsal\\OneDrive\\Desktop\\RSP-Project\\backend\\logs\\admin-2026-06-10.log",
+            "hash": "88d3202cd5a8c5dbfb57efb641175d4eb1d492007b92934ada6b1b807c716abb"
+        },
+        {
+            "date": 1781275255179,
+            "name": "C:\\Users\\afsal\\OneDrive\\Desktop\\RSP-Project\\backend\\logs\\admin-2026-06-12.log",
+            "hash": "89841a2834485d8ea382b3b770eb203b44a8d63bd544d4dc5ee9fb792a929345"
+        },
+        {
+            "date": 1781293859411,
+            "name": "C:\\Users\\afsal\\OneDrive\\Desktop\\RSP-Project\\backend\\logs\\admin-2026-06-13.log",
+            "hash": "013d1eec78f074190ab1089a1901fce992fb227abcfa5b0be823ed0f04e91d09"
+        },
+        {
+            "date": 1781522317733,
+            "name": "C:\\Users\\afsal\\OneDrive\\Desktop\\RSP-Project\\backend\\logs\\admin-2026-06-15.log",
+            "hash": "9dd351e43a19292f87d0de1f2121ea8bc83c55d2c5805888ac9546e69c61394b"
+        },
+        {
+            "date": 1781550066838,
+            "name": "C:\\Users\\afsal\\OneDrive\\Desktop\\RSP-Project\\backend\\logs\\admin-2026-06-16.log",
+            "hash": "decb624a6ef29e031d0b7b707d3611c10188f6c174a76c5dc625462c3f5a5c0b"
+        },
+        {
+            "date": 1781689666906,
+            "name": "C:\\Users\\afsal\\OneDrive\\Desktop\\RSP-Project\\backend\\logs\\admin-2026-06-17.log",
+            "hash": "684d83e8cbf2faca0375aa9adbc5d769d1511842786fe0048f85c396c6ba80bf"
+        },
+        {
+            "date": 1781724038560,
+            "name": "C:\\Users\\afsal\\OneDrive\\Desktop\\RSP-Project\\backend\\logs\\admin-2026-06-18.log",
+            "hash": "70d1071ec2ca4128b5a686ceb05294022065ffd2d4d44bbe0a16f73fa6f77d86"
+        },
+        {
+            "date": 1781942101971,
+            "name": "C:\\Users\\afsal\\OneDrive\\Desktop\\RSP-Project\\backend\\logs\\admin-2026-06-20.log",
+            "hash": "79740324c336e31c440549be23fbefa42c4d37113563e90982347d566ce467d4"
+        }
+    ],
+    "hashType": "sha256"
+}

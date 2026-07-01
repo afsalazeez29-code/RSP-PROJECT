@@ -1,0 +1,20 @@
+{"level":"warn","message":"MongoDB disconnected","timestamp":"2026-06-20T17:41:09.392Z"}
+{"level":"warn","message":"MongoDB connection attempt 1 failed: bad auth : authentication failed","timestamp":"2026-06-20T17:41:09.397Z"}
+{"level":"error","message":"MongoDB error: bad auth : authentication failed","timestamp":"2026-06-20T17:41:09.398Z"}
+{"level":"info","message":"Retrying MongoDB connection (2/3)","timestamp":"2026-06-20T17:41:11.406Z"}
+{"level":"warn","message":"MongoDB disconnected","timestamp":"2026-06-20T17:41:12.142Z"}
+{"level":"warn","message":"MongoDB connection attempt 2 failed: bad auth : authentication failed","timestamp":"2026-06-20T17:41:12.142Z"}
+{"level":"error","message":"MongoDB error: bad auth : authentication failed","timestamp":"2026-06-20T17:41:12.143Z"}
+{"level":"info","message":"Retrying MongoDB connection (3/3)","timestamp":"2026-06-20T17:41:14.157Z"}
+{"level":"warn","message":"MongoDB disconnected","timestamp":"2026-06-20T17:41:14.889Z"}
+{"level":"warn","message":"MongoDB disconnected","timestamp":"2026-06-20T17:42:07.905Z"}
+{"level":"warn","message":"MongoDB connection attempt 1 failed: bad auth : authentication failed","timestamp":"2026-06-20T17:42:07.910Z"}
+{"level":"error","message":"MongoDB error: bad auth : authentication failed","timestamp":"2026-06-20T17:42:07.911Z"}
+{"level":"info","message":"Retrying MongoDB connection (2/3)","timestamp":"2026-06-20T17:42:09.919Z"}
+{"level":"warn","message":"MongoDB disconnected","timestamp":"2026-06-20T17:42:10.661Z"}
+{"level":"warn","message":"MongoDB connection attempt 2 failed: bad auth : authentication failed","timestamp":"2026-06-20T17:42:10.662Z"}
+{"level":"error","message":"MongoDB error: bad auth : authentication failed","timestamp":"2026-06-20T17:42:10.662Z"}
+{"level":"info","message":"Retrying MongoDB connection (3/3)","timestamp":"2026-06-20T17:42:12.674Z"}
+{"level":"warn","message":"MongoDB disconnected","timestamp":"2026-06-20T17:42:13.331Z"}
+{"level":"info","message":"MongoDB connected","timestamp":"2026-06-20T18:12:03.399Z"}
+{"level":"warn","message":"MongoDB disconnected","timestamp":"2026-06-20T18:12:07.912Z"}

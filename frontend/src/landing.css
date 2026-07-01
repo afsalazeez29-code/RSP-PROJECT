@@ -1,0 +1,77 @@
+/* â”€â”€ Global Reset â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+body {
+  margin: 0;
+  padding: 0;
+  display: block;
+  background: #070B08;
+}
+
+/* â”€â”€ Layer 1: Sticky Hero â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.landing-hero-layer {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  z-index: 1;
+  overflow: hidden; /* clips the parallax Y overshoot */
+}
+
+/* â”€â”€ Hero inner content â€” GSAP parallax target â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.landing-hero-inner {
+  width: 100%;
+  height: 100%;
+}
+
+/* â”€â”€ Layer 2: Content curtain â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.landing-content-layer {
+  position: relative;
+  z-index: 2;
+  background: #070B08; /* solid â€” this is what masks Layer 1 */
+}
+
+/* â”€â”€ Hero entrance animation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.hero-container-animate {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 1.25s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 2.50s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero-container-animate.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* â”€â”€ TOP PICKS entrance animation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.top-picks-title {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.top-picks-title.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* custom cursor styles removed */
+
+/* â”€â”€ Generic scroll-reveal â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease-out;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+a,
+button,
+[role="button"] {
+  
+}
+/* Custom cursor removed */
+/* Default cursor behavior restored */
