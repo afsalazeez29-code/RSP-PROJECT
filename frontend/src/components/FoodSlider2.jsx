@@ -7,7 +7,7 @@ import { FaArrowLeft, FaArrowRight, FaFire } from 'react-icons/fa';
 import { MdAccessTime } from 'react-icons/md';
 import { BsPeopleFill } from 'react-icons/bs';
 import { TbChefHatFilled } from 'react-icons/tb';
-// ── Derives a very dark, hue-matched background from the accent colour ────────
+// Derives a very dark, hue-matched background from the accent colour
 function darkBg(hex) {
   const n = parseInt(hex.replace('#', ''), 16);
   const r = Math.round(((n >> 16) & 0xff) * 0.22);
@@ -16,7 +16,7 @@ function darkBg(hex) {
   return `rgb(${r},${g},${b})`;
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+
 
 export default function FoodSlider2({
   sectionTitle = 'Fast Food Recipes',

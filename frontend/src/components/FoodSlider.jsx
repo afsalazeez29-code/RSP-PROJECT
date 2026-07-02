@@ -7,7 +7,7 @@ import { MdAccessTime } from 'react-icons/md';
 import { FaFire, FaArrowRight } from 'react-icons/fa';
 import { BsPeopleFill } from 'react-icons/bs';
 
-// ── Derives a very dark, hue-matched background from the accent colour ────────
+// Derives a very dark, hue-matched background from the accent colour
 function darkBg(hex) {
   const n = parseInt(hex.replace('#', ''), 16);
   const r = Math.round(((n >> 16) & 0xff) * 0.22);
@@ -16,7 +16,7 @@ function darkBg(hex) {
   return `rgb(${r},${g},${b})`;
 }
 
-// ── Free-floating decorative food image (no circle, no border) ───────────────
+// Free-floating decorative food image (no circle, no border)
 function FloatingImg({ src, style, delay = 0, isInView }) {
   return (
     <motion.div
@@ -51,7 +51,7 @@ function FloatingImg({ src, style, delay = 0, isInView }) {
   );
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
+
 
 export default function FoodSlider({
   slides,

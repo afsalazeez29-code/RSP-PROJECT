@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from 'react-router-dom';
-const bgImage = "https://res.cloudinary.com/dgovvdud9/image/upload/v1781717956/bg-img-RSP_bk4k2x.jpg";
+const bgImage = "/bg-img-RSP.jpg";
 import { motion } from 'framer-motion';
 import { FaHeart } from 'react-icons/fa';
 import { TbChefHatFilled } from 'react-icons/tb'; import '../landing.css';
 import ReactCountryFlag from 'react-country-flag';
 
-// â”€â”€ Imported Components â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// Imported Components
 import NavbarLanding from '../components/NavbarLanding';  // 1. Navbar component
 import FoodSlider from '../components/FoodSlider';         // 3. FoodSlider
 import FAQ from '../components/Faq';                       // 4. FAQ component
@@ -14,10 +14,10 @@ import { SliderColorProvider, useSliderColor } from '../context/SliderColorConte
 import { COMPONENT_KEYS, fetchPublishedComponentContent } from '../services/componentContent';
 import { LANDING_SLIDER_RECIPES, LANDING_TOP_RECIPES } from '../data/realContent';
 
-// â”€â”€ Slides data required by FoodSlider / SliderCard â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// Slides data required by FoodSlider / SliderCard
 const slides = LANDING_TOP_RECIPES;
 
-// â”€â”€ Slides data for FoodSlider â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// Slides data for FoodSlider
 const sliderSlides = LANDING_SLIDER_RECIPES;
 
 const mapCardContent = (item) => ({
@@ -33,7 +33,7 @@ const mapCardContent = (item) => ({
   author: item.author || item.createdBy,
 });
 
-// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -48,7 +48,7 @@ const Landing = () => {
   const [managedSliderSlides, setManagedSliderSlides] = useState([]);
   const [managedRecipeCards, setManagedRecipeCards] = useState([]);
 
-  // â”€â”€ Refs â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // Refs
   const cursorRef = useRef(null);
   const cardsRef = useRef(null);
   const sliderRef = useRef(null);
@@ -57,21 +57,21 @@ const Landing = () => {
   const heroContainerRef = useRef(null);
   const topPicksRef = useRef(null);
 
-  // â”€â”€ Derived accent color (changes per food slide) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // Derived accent color (changes per food slide)
   // Now driven by SliderColorContext (sliderColor) rather than local slides array
   const activeSliderSlides = managedSliderSlides.length ? managedSliderSlides : sliderSlides;
   const activeTopCards = managedRecipeCards.length ? managedRecipeCards.map(mapCardContent) : slides;
   const currentAccent = activeSliderSlides[activeSlide]?.accentColor || sliderColor;
 
-  // â”€â”€ Helpers for custom cursor â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // Helpers for custom cursor
   const cursorEnter = () => cursorRef.current?.classList.add('hovered');
   const cursorLeave = () => cursorRef.current?.classList.remove('hovered');
 
-  // â”€â”€ Responsive flags â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // Responsive flags
   const isMobile = width < 640;
   const isTablet = width < 1024;
 
-  // â”€â”€ Effects â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // Effects
   useEffect(() => {
     const loadManagedContent = async () => {
       try {
@@ -172,7 +172,7 @@ const Landing = () => {
     };
   }, []);
 
-  // â”€â”€ Styles â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // Styles
   const styles = {
     heroInner: {
       width: "100%",
@@ -273,7 +273,7 @@ const Landing = () => {
     },
   };
 
-  // â”€â”€ Render â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // Render
   return (
     <>
       {/* NavbarLanding fixed over all layers */}
@@ -427,7 +427,7 @@ const Landing = () => {
                       else if (cuisinePart.includes('Thai')) countryCode = 'TH';
                       else if (cuisinePart.includes('Japanese')) countryCode = 'JP';
                       else if (cuisinePart.includes('USA') || cuisinePart.includes('American')) countryCode = 'US';
-                      
+
                       if (countryCode) {
                         return (
                           <>

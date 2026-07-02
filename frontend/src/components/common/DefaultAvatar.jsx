@@ -1,6 +1,6 @@
 import React from "react";
 
-export const DEFAULT_AVATAR_URL = "https://res.cloudinary.com/dgovvdud9/image/upload/v1781717933/defaultpfp_kw2j6n.png";
+export const DEFAULT_AVATAR_URL = "/defaultpfp.png";
 
 const DefaultAvatar = ({ src, alt, className, style, size = 40 }) => {
   const [imgSrc, setImgSrc] = React.useState(src || DEFAULT_AVATAR_URL);

@@ -6,8 +6,7 @@ import { login, signup } from "../services/api";
 import Footer from "../components/Footer";
 import "./AuthPage.css";
 
-const bgImg =
-  "https://res.cloudinary.com/dgovvdud9/image/upload/v1781717956/bg-img-RSP_bk4k2x.jpg";
+const bgImg = "/bg-img-RSP.jpg";
 
 /* ── SVG Icons ─────────────────────────────────────────── */
 const UserIcon = () => (

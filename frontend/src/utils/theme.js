@@ -1,4 +1,4 @@
-const bgImg = "https://res.cloudinary.com/dgovvdud9/image/upload/v1781717956/bg-img-RSP_bk4k2x.jpg";
+const bgImg = "/bg-img-RSP.jpg";
 
 export const ACCENT_HEX = "#e8b84b";
 export const ACCENT_DARK_HEX = "#c9972d";

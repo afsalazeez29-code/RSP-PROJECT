@@ -17,7 +17,7 @@ import {
   HOME_HERO_BANNERS,
 } from "../data/realContent";
 
-const bgImage = "https://res.cloudinary.com/dgovvdud9/image/upload/v1781717956/bg-img-RSP_bk4k2x.jpg";
+const bgImage = "/bg-img-RSP.jpg";
 const HOME_RECIPE_CARD_TOTAL = 4;
 const HOME_REAL_RECIPE_LIMIT = 16;
 const HOME_CLOUDINARY_RECIPE_CARDS = [

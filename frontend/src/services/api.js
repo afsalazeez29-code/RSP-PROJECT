@@ -33,9 +33,9 @@ API.interceptors.response.use(
   }
 );
 
-// ─────────────────────────────────────────────────────────────
+
 // AUTH APIS
-// ─────────────────────────────────────────────────────────────
+
 
 // LOGIN
 export const login = async (email, password) => {
@@ -136,9 +136,9 @@ export const changePassword = async (currentPassword, newPassword) => {
   }
 };
 
-// ─────────────────────────────────────────────────────────────
+
 // RECIPE APIS
-// ─────────────────────────────────────────────────────────────
+
 
 // GET ALL RECIPES (with pagination, search, category, difficulty filters)
 export const getRecipes = async (params = {}) => {
@@ -220,9 +220,9 @@ export const recordRecipeView = async (id) => {
   }
 };
 
-// ─────────────────────────────────────────────────────────────
+
 // USER-SPECIFIC RECIPE APIS  (all protected)
-// ─────────────────────────────────────────────────────────────
+
 
 // GET USER'S OWN RECIPES
 export const getMyRecipes = async (params = {}) => {
