@@ -94,3 +94,6 @@
 {"durationMs":410,"ip":"::1","level":"info","message":"request","method":"GET","path":"/api/recipes?limit=50","statusCode":304,"timestamp":"2026-07-01T23:12:13.513Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36"}
 {"durationMs":417,"ip":"::1","level":"info","message":"request","method":"GET","path":"/api/recipes?limit=50","statusCode":304,"timestamp":"2026-07-01T23:20:20.540Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36"}
 {"durationMs":365,"ip":"::1","level":"info","message":"request","method":"GET","path":"/api/recipes?limit=50","statusCode":304,"timestamp":"2026-07-01T23:22:45.522Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36"}
+{"level":"info","message":"MongoDB connected","timestamp":"2026-07-02T15:54:33.133Z"}
+{"level":"info","message":"Recipio backend listening on port 4000","timestamp":"2026-07-02T15:54:34.405Z"}
+{"durationMs":1066,"ip":"::1","level":"info","message":"request","method":"GET","path":"/api/users/profile","statusCode":304,"timestamp":"2026-07-02T15:55:01.026Z","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36"}
