@@ -39,7 +39,7 @@ app.use(helmet({
       scriptSrc: ["'self'", "'unsafe-inline'", 'cdn.jsdelivr.net'],
       styleSrc: ["'self'", "'unsafe-inline'", 'cdn.jsdelivr.net', 'cdnjs.cloudflare.com'],
       fontSrc: ["'self'", 'data:', 'cdn.jsdelivr.net', 'cdnjs.cloudflare.com'],
-      connectSrc: ["'self'", 'http://localhost:*', 'http://127.0.0.1:*']
+      connectSrc: ["'self'", 'http://localhost:*', 'http://127.0.0.1:*', process.env.BACKEND_URL || 'https://recipeio.duckdns.org']
     }
   }
 }));
