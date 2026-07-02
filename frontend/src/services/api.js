@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Create axios instance with base URL - using correct backend port 4000
 const API = axios.create({
-  baseURL: "http://54.88.239.164:4000/api",
+  baseURL: import.meta.env.VITE_API_URL || "http://localhost:4000/api",
   timeout: 10000, // 10 second timeout
   withCredentials: true,
 });

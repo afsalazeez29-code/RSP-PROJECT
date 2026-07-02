@@ -48,7 +48,12 @@ app.use(compression());
 
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin || /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin) || origin === process.env.FRONTEND_ORIGIN) {
+    if (
+      !origin ||
+      /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin) ||
+      /^https:\/\/rsp-project(-[\w-]+)?\.vercel\.app$/.test(origin) ||
+      origin === process.env.FRONTEND_ORIGIN
+    ) {
       return callback(null, true);
     }
     return callback(new Error('CORS origin not allowed.'));
